@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated ,AllowAny
 from rest_framework import status
 
 from ..serializers.entrada_salida_serializer import (
@@ -10,7 +10,7 @@ from ..serializers.entrada_salida_serializer import (
 
 
 class EntradaAsistenciaView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def post(self, request):
         serializer = EntradaAsistenciaSerializer(data=request.data)
@@ -29,7 +29,7 @@ class EntradaAsistenciaView(APIView):
 
 
 class SalidaAsistenciaView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def post(self, request):
         serializer = SalidaAsistenciaSerializer(data=request.data)
