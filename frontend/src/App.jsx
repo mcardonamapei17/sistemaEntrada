@@ -1,31 +1,13 @@
-import DocumentoInput from "./kiosk/components/DocumentoInput";
-import { BuscarDocumentos } from "./api/attendanceApi";
-import { useState } from "react";
+import { Box } from "@mui/material";
+import KioskPage from "./kiosk/pages/kioskPage"; // Quita las llaves {}
+import Navbar from "./utils/components/navbar";
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const handleBuscar = async (documento) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const data = await BuscarDocumentos(documento);
-      console.log("Resultado:", data);
-    } catch (err) {
-      setError("Error consultando documento");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <DocumentoInput
-      onBuscar={handleBuscar}
-      loading={loading}
-      error={error}
-    />
+    <Box sx={{minHeight: '100vh', backgroundColor: '#f5f5f5'}}>
+      <Navbar />
+      <KioskPage />
+    </Box>
   );
 }
 
