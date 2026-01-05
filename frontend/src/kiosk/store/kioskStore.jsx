@@ -76,9 +76,19 @@ export const useKioskStore = create((set,get)=>({
     }
 },
 
-    marcarCompletado: (mensaje = "Operacion realizada correctamente") => 
-        set({
-            status: 'done',
+    // En useKioskStore
+    marcarCompletado: async (mensaje = "Operación realizada correctamente") => {
+        // 1. Mostramos el mensaje de éxito
+        set({ 
+            status: 'done', 
             mensaje,
-        }),
+            loading: false 
+        });
+
+        // 2. Esperamos 3 segundos (tiempo ideal para lectura en Kiosko)
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
+        // 3. Limpiamos todo usando la acción reset que ya tienes
+        get().reset();
+    },
 }));

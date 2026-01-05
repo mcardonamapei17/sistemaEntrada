@@ -73,6 +73,7 @@ export default function RegistroEntradaForm() {
       });
     } catch (err) {
       setError("Error registrando la entrada");
+      setLoading(false);
     } finally {
       setLoading(false);
     }

@@ -34,6 +34,8 @@ export default function RegistroSalidaForm() {
       }, 3000);
     } catch (err) {
       setError("Error registrando la salida");
+      console.error("Detalle del error: ", err.response?.data);
+      setError(err.response?.data?.non_field_errors?.[0]||"Error no detallado")
     } finally {
       setLoading(false);
     }
