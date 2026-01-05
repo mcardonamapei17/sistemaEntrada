@@ -14,10 +14,13 @@ class UsuarioSerializer(serializers.ModelSerializer):
             'id',
             'nombre',
             'apellido',
+            'rol',
             'tipo_documento',
             'numero_documento',
             'empresa',
             'empresa_nombre',
+            'ARL',
+            'EPS',
             'activo',
             'fecha_creacion',
         ]
