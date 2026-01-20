@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'usuarios',
     'attendance',
     'management',
+    'vehiculos',
 ]
 
 MIDDLEWARE = [
@@ -115,7 +116,7 @@ DATABASES = {
         'NAME': 'registro_horas',
         'USER': 'registro_user',
         'PASSWORD': 'PruebaDePython23',
-        'HOST': '172.17.170.121',
+        'HOST': '172.17.170.131',
         'PORT': '5433',
     }
 }

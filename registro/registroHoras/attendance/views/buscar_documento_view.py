@@ -47,6 +47,15 @@ class BuscarDocumentoView(APIView):
             .first()
         )
 
+        # Buscar última salida registrada
+        ultima_salida = (
+            RegistroEntrada.objects
+            .select_related("sede")
+            .filter(usuario=usuario, hora_salida__isnull=False)
+            .order_by("-hora_salida")
+            .first()
+        )
+
         data = {
             "existe": True,
             "tipo": usuario.rol.id if hasattr(usuario, "rol") else usuario.tipo,
@@ -79,6 +88,19 @@ class BuscarDocumentoView(APIView):
                 "sede": {
                     "id": registro_abierto.sede.id,
                     "nombre": registro_abierto.sede.nombre_sede,
+                }
+            }
+
+        # Última salida registrada
+        if ultima_salida:
+            data["ultima_salida"] = {
+                "id": ultima_salida.id,
+                "fecha": ultima_salida.fecha,
+                "hora_entrada": ultima_salida.hora_entrada,
+                "hora_salida": ultima_salida.hora_salida,
+                "sede": {
+                    "id": ultima_salida.sede.id,
+                    "nombre": ultima_salida.sede.nombre_sede,
                 }
             }
 
