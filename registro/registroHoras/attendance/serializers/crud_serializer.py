@@ -3,10 +3,22 @@ from ..models import RegistroEntrada
 
 class RegistroEntradaSerializer(serializers.ModelSerializer):
     usuario_nombre = serializers.SerializerMethodField()
+    usuario_documento = serializers.SerializerMethodField()
+    usuario_tipo = serializers.SerializerMethodField()
+    empresa_nombre = serializers.SerializerMethodField()
     sede_nombre = serializers.SerializerMethodField()
 
     def get_usuario_nombre(self, obj):
         return f"{obj.usuario.nombre} {obj.usuario.apellido}"
+
+    def get_usuario_documento(self, obj):
+        return obj.usuario.numero_documento
+
+    def get_usuario_tipo(self, obj):
+        return obj.usuario.tipo if hasattr(obj.usuario, 'tipo') else 2
+
+    def get_empresa_nombre(self, obj):
+        return obj.usuario.empresa.nombre_empresa if obj.usuario.empresa else None
 
     def get_sede_nombre(self, obj):
         return obj.sede.nombre_sede
@@ -17,8 +29,11 @@ class RegistroEntradaSerializer(serializers.ModelSerializer):
             'id',
             'usuario',
             'usuario_nombre',
+            'usuario_documento',
+            'usuario_tipo',
             'sede',
             'sede_nombre',
+            'empresa_nombre',
             'fecha',
             'hora_entrada',
             'hora_salida',
